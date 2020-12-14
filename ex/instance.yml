@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  gather_facts: False
+  
+  tasks:
+    - name: Provision a set of instances
+      ec2:
+         key_name: infra-key
+         group: launch-wizard-13
+         instance_type: t2.micro
+         image: ami-0db0b3ab7df22e366
+         region: ap-south-1
+         wait: true
+         exact_count: 0
+         count_tag:
+            Name: Demo
+         instance_tags:
+            Name: Demo
+      register: ec2
+    - debug:
+        msg: "{{ec2}}"
+    - debug:
+        msg: "Login to instance with IP: {{ec2.tagged_instances[0].public_ip}}"
