@@ -1,0 +1,15 @@
+---
+- name: Set host to ip mappping in /etc/hosts file of all the instances in the stack
+  hosts: all
+  tasks:
+    - name: Update hosts file
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          172.31.33.99 web01
+          172.31.14.53 web02
+          172.31.44.176 app01
+          172.31.6.235 app02
+          172.31.46.249 mc01
+          172.31.5.54 rmq01
+          172.31.40.100 db01

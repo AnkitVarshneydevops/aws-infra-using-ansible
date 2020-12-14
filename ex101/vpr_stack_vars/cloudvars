@@ -1,0 +1,7 @@
+region: ap-south-1
+sg: sg-02a54117ade611cb1
+ami: ami-042b34111b1289ccd
+inst_type: t2.micro
+sub3: subnet-db862ba0
+sub2: subnet-5c74ef10
+sub1: subnet-19744171

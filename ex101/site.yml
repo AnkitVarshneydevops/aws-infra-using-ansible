@@ -1,0 +1,7 @@
+---
+- import_playbook: db.yml
+- import_playbook: dbdeploy.yml
+- import_playbook: memcache.yml
+- import_playbook: rmq.yml
+- import_playbook: appserver.yml
+- import_playbook: web.yml
