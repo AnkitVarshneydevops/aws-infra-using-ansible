@@ -1,0 +1,29 @@
+---
+- name: Creating vpc
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: create a VPC with dedicated tenancy and a couple of tags
+      ec2_vpc_net:
+        name: Module_dev2
+        cidr_block: 10.10.0.0/16
+        region: ap-south-1 
+        tags:
+          module: ec2_vpc_net
+          this: works
+        tenancy: dedicated
+      register: vpc1
+    - debug:
+        msg: "{{vpc1.vpc.id}}"
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{vpc1.vpc.id}}"
+        cidr: 10.10.0.1/24
+        region: ap-south-1
+        az: ap-south-1a
+        tags:
+          Name: Database Subnet
+      register: database_subnet
+    - debug:
+        msg: "{{database_subnet}}"
